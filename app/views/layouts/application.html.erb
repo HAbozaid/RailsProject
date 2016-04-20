@@ -7,26 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
-
-<div class="container">
-  <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>">
-      <%= value %>
-    </div>
-  <% end %>
-</div>
-
-<%= yield :top_content %>
-
-<div class="container">
-    <h1><%= yield :header %></h1>
-  <%= yield %>
-</div>
-
-
 <nav class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
@@ -38,6 +18,7 @@
       </ul>
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
+        <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <%= current_user.name %>
@@ -56,6 +37,23 @@
     </div>
   </div>
 </nav>
+
+
+
+<div class="container">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
+</div>
+
+<%= yield :top_content %>
+
+<div class="container">
+    <h1><%= yield :header %></h1>
+  <%= yield %>
+</div>
 
 </body>
 </html>
