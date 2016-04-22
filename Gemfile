@@ -2,8 +2,11 @@ source 'https://rubygems.org'
 
 
 
+#for login with facebook
+gem 'omniauth-facebook'
 
 gem 'devise', '3.4.1'
+
 gem 'bootstrap-sass'
 
 
