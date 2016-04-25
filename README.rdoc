@@ -1,6 +1,9 @@
 PLEASE EVERYONE UNTRACK THE THESE FILES TO AVOID DB CONFIG PROBLEM:
+
 git rm --cached config/database.yml
+
 git rm --cached log/development.log
+
 
 
 == README
