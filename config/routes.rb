@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
+  resources :friendships
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   root 'pages#index'
+
+
+
+
+  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  get 'relationships' => 'relationships#create'
+  resources :relationships
+
 
   
   # The priority is based upon order of creation: first created -> highest priority.

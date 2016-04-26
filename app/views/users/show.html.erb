@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </section>
+
+     <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+
+  </aside>
+  <div class="col-md-8">
+   <%= render 'follow_form' if user_signed_in? %>
+</div>
+</div>
+
+
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
