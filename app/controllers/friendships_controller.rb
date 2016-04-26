@@ -24,9 +24,8 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    @usersByEmail = User.find_by(email: friendship_params[:friend_id])
-    #puts "****************+@usersByEmail+************"
-    friendship_params[:friend_id] = @usersByEmail.id
+    # @usersByEmail = User.find_by(email: friendship_params[:friend_id])
+    # friendship_params[:friend_id] = @usersByEmail.id
 
     @friendship = Friendship.new(friendship_params)
 
