@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 #for login with facebook
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 gem 'devise', '3.4.1'
 

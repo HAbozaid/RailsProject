@@ -1,0 +1,2 @@
+rails generate migration add_status_to_orders status:string 
+
