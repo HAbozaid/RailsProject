@@ -54,3 +54,5 @@ group :development do
   gem 'spring'
 end
 
+# Public activity allows to store the activity any user does to use them in notifications
+gem	'public_activity'
