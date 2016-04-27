@@ -28,13 +28,13 @@ class FriendshipsController < ApplicationController
       if @usersByEmail.id == current_user.id || Friendship.find_by(user_id: friendship_params[:user_id], friend_id: @usersByEmail.id )
         
         respond_to do |format|
-            format.html { redirect_to action: "index", notice: 'Friendship was Not created.' }
+            format.html { redirect_to friendships_url notice: 'Friendship was Not created.' }
         end
       else
         @friendship = Friendship.new(friend_id: @usersByEmail.id, user_id: friendship_params[:user_id])
         respond_to do |format|
           if @friendship.save
-            format.html { redirect_to action: "index", notice: 'Friendship was successfully created.' }
+            format.html { redirect_to friendships_url, notice: 'Friendship was successfully created.' }
             #format.json { render :index, status: :created, location: @friendship }
           else
             format.html { render :index }
@@ -45,7 +45,7 @@ class FriendshipsController < ApplicationController
       end
     else
       respond_to do |format|
-            format.html { redirect_to action: "index", notice: 'Email Not Found or not Correct.' }
+            format.html { redirect_to friendships_url, notice: 'Email Not Found or not Correct.' }
             format.json { render json: @friendship.errors, status: :unprocessable_entity }
         end
     end
