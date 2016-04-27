@@ -8,15 +8,16 @@ class User < ActiveRecord::Base
 
   #############################NESMA#######################
 
-  has_many :microposts, dependent: :destroy
-  has_many :active_relationships,  class_name:  "Relationship",
-                                   foreign_key: "follower_id",
-                                   dependent:   :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent:   :destroy
-  has_many :following, through: :active_relationships,  source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
+  # has_many :active_relationships,  class_name:  "Relationship",
+  #                                  foreign_key: "follower_id",
+  #                                  dependent:   :destroy
+
+  # has_many :passive_relationships, class_name:  "Relationship",
+  #                                  foreign_key: "followed_id",
+  #                                  dependent:   :destroy
+
+  # has_many :following, through: :active_relationships,  source: :followed
+  # has_many :followers, through: :passive_relationships, source: :follower
 
   #############################NESMA#######################
 
@@ -55,10 +56,18 @@ class User < ActiveRecord::Base
   end
     ###########################NESMA########################
 
-  has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :friendships , dependent:   :destroy
+  has_many :friends, :through => :friendships ,dependent:   :destroy
 
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id" , dependent:   :destroy
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user , dependent:   :destroy
+
+
+ private
+
+    # Converts email to all lower-case.
+    def downcase_email
+      self.email = email.downcase
+    end
 
 end

@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
   # GET /friendships
   # GET /friendships.json
   def index
-    @friendships = Friendship.all
+    @friendships = Friendship.where(user_id: current_user.id)
     @friendship = Friendship.new
     @users = User.all
   end
@@ -22,34 +22,35 @@ class FriendshipsController < ApplicationController
   # GET /friendships/1/edit
   def edit
   end
-
   def create
-    # @usersByEmail = User.find_by(email: friendship_params[:friend_id])
-    # friendship_params[:friend_id] = @usersByEmail.id
-
-    @friendship = Friendship.new(friendship_params)
-
-    if friendship_params[:friend_id] == friendship_params[:user_id] || Friendship.find_by(user_id: friendship_params[:user_id], friend_id: friendship_params[:friend_id] )
-      
-      respond_to do |format|
-          format.html { redirect_to @friendship, notice: 'Friendship was Not created.' }
-      end
-
-    else
-
-      respond_to do |format|
-        if @friendship.save
-          format.html { redirect_to @friendship, notice: 'Friendship was successfully created.' }
-        else
-          format.html { render :index }
-          format.json { render json: @friendship.errors, status: :unprocessable_entity }
+    @usersByEmail = User.find_by(email: friendship_params[:friend_id]) 
+    if @usersByEmail
+      if @usersByEmail.id == current_user.id || Friendship.find_by(user_id: friendship_params[:user_id], friend_id: @usersByEmail.id )
+        
+        respond_to do |format|
+            format.html { redirect_to action: "index", notice: 'Friendship was Not created.' }
         end
+      else
+        @friendship = Friendship.new(friend_id: @usersByEmail.id, user_id: friendship_params[:user_id])
+        respond_to do |format|
+          if @friendship.save
+            format.html { redirect_to action: "index", notice: 'Friendship was successfully created.' }
+            #format.json { render :index, status: :created, location: @friendship }
+          else
+            format.html { render :index }
+            format.json { render json: @friendship.errors, status: :unprocessable_entity }
+          end
+        end
+        
       end
-      
+    else
+      respond_to do |format|
+            format.html { redirect_to action: "index", notice: 'Email Not Found or not Correct.' }
+            format.json { render json: @friendship.errors, status: :unprocessable_entity }
+        end
     end
+    
   end
-
-
 
   # PATCH/PUT /friendships/1
   # PATCH/PUT /friendships/1.json
