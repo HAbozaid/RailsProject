@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 
 
+
+gem 'public_activity'
+
 #for login with facebook
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'

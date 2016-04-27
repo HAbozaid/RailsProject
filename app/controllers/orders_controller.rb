@@ -1,5 +1,22 @@
 class OrdersController < ApplicationController
 
+
+	def create
+	  @order = Order.new(order_all_params)
+	  puts '-------------------' + @order.inspect + '----------------------------'
+	  if @order.save
+		  @order.create_activity :create, owner: current_user
+	      redirect_to orders_path
+	    else
+	      render 'new'
+	    end
+
+	end
+
+	def new
+	  @order = Order.new
+	end
+
 	def show
     	@order = Order.find(params[:id])
     	self.getUserNames
@@ -43,5 +60,9 @@ class OrdersController < ApplicationController
 	  def order_params
 	    params.require(:order).permit(:status)
 	  end
+
+	 def order_all_params
+	 	 params.require(:order).permit(:status, :name ,:description)
+	 end
 
 end

@@ -1,10 +1,20 @@
 <% content_for :top_content do %>
+
   <div class="jumbotron">
     <div class="container">
-      <h1>Welcome!</h1>
+      <h1>Welcome Hesham!</h1>
       <p>Register to get started.</p>
       <p>
       </p>
     </div>
   </div>
+
+	<% @acivities.each do |activity| %>
+	<div class="activity">
+	<%= link_to activity.owner.name%>
+	add order <%= link_to activity.trackable.name %>
+	</div>
+	<% end %>
+
 <% end %>
+
