@@ -1,0 +1,41 @@
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+
+    <%= f.label :for %><br>
+  <%= f.select :orderchose, ['BreakFast', 'Lunch']%>
+  </div>
+  <div class="field">
+    <%= f.label :from %><br>
+    <%= f.text_field :from %>
+  </div>
+  <div class="field">
+    <%= f.label :menu_image %><br>
+    <%= f.file_field :menu_image , :accept=>"image/*" %>
+  </div>
+  <div class="field">
+    <%= f.label :friends %><br>
+    <%= f.text_field :friends %>
+  </div>
+  <div class="field">
+   
+    <%= f.hidden_field :status, :value=>"waiting"%>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :user_id , :value=>current_user.id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

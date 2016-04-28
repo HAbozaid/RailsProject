@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   resources :friendships
+  resources :inviteds
+  resources :orders do
+    resources:order_details
+  end
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   root 'pages#index'
 
-
+ resources :orders do
+       resources :inviteds
+    end
 
 
   resources :users

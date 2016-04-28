@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  for: MyString
+  from: MyString
+  menu_image: MyString
+  status: MyString
+  user_id: 1
+
+two:
+  for: MyString
+  from: MyString
+  menu_image: MyString
+  status: MyString
+  user_id: 1

@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426113939) do
+ActiveRecord::Schema.define(version: 20160427183951) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "trackable_id",   limit: 4
+    t.string   "trackable_type", limit: 255
+    t.integer  "owner_id",       limit: 4
+    t.string   "owner_type",     limit: 255
+    t.string   "key",            limit: 255
+    t.text     "parameters",     limit: 65535
+    t.integer  "recipient_id",   limit: 4
+    t.string   "recipient_type", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "friend_id",  limit: 4
@@ -20,18 +37,40 @@ ActiveRecord::Schema.define(version: 20160426113939) do
     t.datetime "updated_at",           null: false
   end
 
-  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
-
-  create_table "relationships", force: :cascade do |t|
-    t.integer  "follower_id", limit: 4
-    t.integer  "followed_id", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+  create_table "inviteds", force: :cascade do |t|
+    t.integer  "order_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
-  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
-  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+  add_index "inviteds", ["order_id"], name: "index_inviteds_on_order_id", using: :btree
+  add_index "inviteds", ["user_id"], name: "index_inviteds_on_user_id", using: :btree
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer  "amount",     limit: 4
+    t.string   "item",       limit: 255
+    t.integer  "price",      limit: 4
+    t.string   "comment",    limit: 255
+    t.integer  "order_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "order_details", ["order_id"], name: "index_order_details_on_order_id", using: :btree
+  add_index "order_details", ["user_id"], name: "index_order_details_on_user_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "for",        limit: 255
+    t.string   "from",       limit: 255
+    t.string   "menu_image", limit: 255
+    t.string   "status",     limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "friends",    limit: 255
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -54,5 +93,8 @@ ActiveRecord::Schema.define(version: 20160426113939) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "friendships", "users"
+  add_foreign_key "inviteds", "orders"
+  add_foreign_key "inviteds", "users"
+  add_foreign_key "order_details", "orders"
+  add_foreign_key "order_details", "users"
 end

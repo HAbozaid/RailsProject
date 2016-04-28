@@ -7,4 +7,13 @@
       </p>
     </div>
   </div>
+
+	<% @acivities.each do |activity| %>
+	<div class="activity">
+	<%= link_to activity.owner.name %>
+	add order from <%= link_to activity.trackable.from %>
+	</div>
+	<% end %>
+
 <% end %>
+

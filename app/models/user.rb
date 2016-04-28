@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :order_detail, dependent: :destroy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
@@ -61,4 +63,13 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
+  has_many :orders , :dependent => :destroy
+  has_many :inviteds, :dependent =>  :destroy  
+  has_many :orders, :through => :inviteds
+  
+  #validates :name, presence: true,length: { minimum: 3 }  ,uniqueness: true
+
+      #  validates :avatar, presence: true
+
+    validates :email, presence: true, uniqueness: true
 end

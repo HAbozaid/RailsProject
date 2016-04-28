@@ -1,0 +1,2 @@
+class AddOrderController < ApplicationController
+end

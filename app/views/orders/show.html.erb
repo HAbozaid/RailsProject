@@ -1,0 +1,38 @@
+<h2>Orders</h2>
+ 
+
+
+<% @order.order_details.each do |order_detail| %>
+  <p>
+ <strong>orderer:</strong>
+    <% @users.each do |user|%>
+    <%= user.name%>
+    <%end%>
+    <strong>item:</strong>
+    <%= order_detail.item %>   ---
+    <strong>amount:</strong>
+    <%= order_detail.amount %>   ---
+    <strong>price:</strong>
+    <%= order_detail.price %>   ---
+    <strong>comment:</strong>
+    <%= order_detail.comment %>   ---
+  </p>
+<% end %>
+
+name <%=  current_user.name %>
+<h2>Add a order details:</h2>
+<%= form_for([@order, @order.order_details.build]) do |f| %>
+  <p>
+    <%= f.hidden_field :user_id , :value=>current_user.id %> 
+    <%= f.label :item %> <%= f.text_field :item %> <br>
+    <%= f.label :amount %> <%= f.text_field :amount %> <br>
+    <%= f.label :price %> <%= f.text_field :price %> <br>
+    <%= f.label :comment %> <%= f.text_field :comment %> <br>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
+<%= link_to 'Back', orders_path %>

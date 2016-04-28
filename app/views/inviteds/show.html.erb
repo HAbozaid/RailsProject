@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @invited.order %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @invited.user %>
+</p>
+
+<%= link_to 'Edit', edit_invited_path(@invited) %> |
+<%= link_to 'Back', inviteds_path %>

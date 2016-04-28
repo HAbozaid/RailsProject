@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Inviteds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inviteds.each do |invited| %>
+      <tr>
+        <td><%= invited.order %></td>
+        <td><%= invited.user %></td>
+        <td><%= link_to 'Show', invited %></td>
+        <td><%= link_to 'Edit', edit_invited_path(invited) %></td>
+        <td><%= link_to 'Destroy', invited, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Invited', new_invited_path %>
