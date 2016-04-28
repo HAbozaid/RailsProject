@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
+<<<<<<< HEAD
   setup do
     @order = orders(:one)
   end
@@ -46,4 +47,9 @@ class OrdersControllerTest < ActionController::TestCase
 
     assert_redirected_to orders_path
   end
+=======
+  # test "the truth" do
+  #   assert true
+  # end
+>>>>>>> refs/remotes/origin/master
 end

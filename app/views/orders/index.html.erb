@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Orders</h1>
@@ -35,3 +36,38 @@
 <br>
 
 <%= link_to 'New Order', new_order_path %>
+=======
+<h1>Listing orders</h1>
+ 
+<table>
+  <tr>
+    <th>name</th>
+    <th>description</th>
+     <th>status</th>
+  </tr>
+ 
+  
+  <% @orders.each do |order| %>
+    <% if order.status=="finished" %>
+    <tr>
+    <td><%= order.name %></td>
+    <td><%= order.description %></td>
+    <td><%= order.status %></td>
+    <td><%= link_to 'Show', order_path(order) %></td>
+    </tr>
+    <%else %> 
+    <tr>
+      <td><%= order.name %></td>
+      <td><%= order.description %></td>
+       <td><%= order.status %></td>
+      <td><%= link_to 'Show', order_path(order) %></td>
+       <td><%= link_to 'finish',order_path(order) ,method: :put %></td>
+      <td><%= link_to 'Cancel', order_path(order),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+        <%end%>  
+
+  <% end %>
+</table>
+>>>>>>> refs/remotes/origin/master

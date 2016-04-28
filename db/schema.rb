@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160427183951) do
+=======
+ActiveRecord::Schema.define(version: 20160427145900) do
+>>>>>>> refs/remotes/origin/master
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -30,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160427183951) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
+<<<<<<< HEAD
   create_table "friendships", force: :cascade do |t|
     t.integer  "friend_id",  limit: 4
     t.integer  "user_id",    limit: 4
@@ -70,6 +75,38 @@ ActiveRecord::Schema.define(version: 20160427183951) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "friends",    limit: 255
+=======
+  create_table "fbusers", force: :cascade do |t|
+    t.string   "provider",         limit: 255
+    t.string   "uid",              limit: 255
+    t.string   "name",             limit: 255
+    t.string   "oauth_token",      limit: 255
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+>>>>>>> refs/remotes/origin/master
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer  "amount",     limit: 4
+    t.string   "item",       limit: 255
+    t.integer  "price",      limit: 4
+    t.string   "comment",    limit: 255
+    t.integer  "order_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "order_details", ["order_id"], name: "index_order_details_on_order_id", using: :btree
+  add_index "order_details", ["user_id"], name: "index_order_details_on_user_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "status",      limit: 255
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,8 +130,11 @@ ActiveRecord::Schema.define(version: 20160427183951) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+<<<<<<< HEAD
   add_foreign_key "inviteds", "orders"
   add_foreign_key "inviteds", "users"
+=======
+>>>>>>> refs/remotes/origin/master
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "users"
 end

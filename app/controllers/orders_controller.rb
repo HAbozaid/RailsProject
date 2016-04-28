@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+<<<<<<< HEAD
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -78,6 +79,58 @@ def getUserNames
       end
 
   end
+=======
+
+
+	def create
+	  @order = Order.new(order_all_params)
+	  puts '-------------------' + @order.inspect + '----------------------------'
+	  if @order.save
+		  @order.create_activity :create, owner: current_user
+	      redirect_to orders_path
+	    else
+	      render 'new'
+	    end
+
+	end
+
+	def new
+	  @order = Order.new
+	end
+
+	def show
+    	@order = Order.find(params[:id])
+    	self.getUserNames
+  	end
+
+ 	def index
+    @orders = Order.all
+  	end
+
+  	def getUserNames
+    	@users= User.where(id: params[:id])
+    # 	users.all.each do |user|
+  		# user.name
+  	end
+
+	def destroy
+	      _run_process_action_callbacks{ cancel }
+	end
+
+    def update
+    	_run_process_action_callbacks{ finish }
+	end
+
+	def finish
+		@order = Order.find(params[:id])
+		if @order.update_attribute(:status, "finished")
+		    redirect_to @order
+		  else
+		    render 'index'
+		  end
+
+	end
+>>>>>>> refs/remotes/origin/master
 
 	def cancel
 	@order = Order.find(params[:id])
@@ -85,6 +138,7 @@ def getUserNames
 	redirect_to orders_path
 	end
 
+<<<<<<< HEAD
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -97,5 +151,15 @@ def getUserNames
     end
 
 
+=======
+	private
+	  def order_params
+	    params.require(:order).permit(:status)
+	  end
+
+	 def order_all_params
+	 	 params.require(:order).permit(:status, :name ,:description)
+	 end
+>>>>>>> refs/remotes/origin/master
 
 end

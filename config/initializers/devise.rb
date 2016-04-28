@@ -4,8 +4,9 @@ Devise.setup do |config|
   
 
   #facebook authentication
-  #----------------------------app_id-----------------app_seceret
-  config.omniauth :facebook, "FACEBOOK_APP_ID", "FACEBOOK_SECRET"
+  #----------------------------app_id-----------------app_secret
+  config.omniauth :facebook, "198925067146751", "506c91ae2987072d0f0b18ec5e86e272"
+  config.omniauth :google_oauth2, "870696254304-kcclnomrj29svo86bsofglafaekbdb4b.apps.googleusercontent.com", "il5s0ydvBX0xUCv55Z-nQ_7j",skip_jwt: true
 
   
   # The secret key used by Devise. Devise uses this key to generate

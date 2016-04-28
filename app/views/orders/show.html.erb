@@ -1,9 +1,23 @@
 <h2>Orders</h2>
+<<<<<<< HEAD
  
 
 
 <% @order.order_details.each do |order_detail| %>
   <p>
+=======
+<% @order.order_details.each do |order_detail| %>
+  <p>
+  <!-- 
+  <strong>orderer:</strong>
+    <%users= User.where(id: order_detail.user_id)%>
+    <% users.all.each do |user|%>
+  <%user.name%>
+  <%users= User.find(2)%>
+    <%=users.name%>
+  <%end%>
+ -->
+>>>>>>> refs/remotes/origin/master
  <strong>orderer:</strong>
     <% @users.each do |user|%>
     <%= user.name%>
@@ -19,8 +33,14 @@
   </p>
 <% end %>
 
+<<<<<<< HEAD
 name <%=  current_user.name %>
 <h2>Add a order details:</h2>
+=======
+
+<%=  current_user.id %>
+<h2>Add a order:</h2>
+>>>>>>> refs/remotes/origin/master
 <%= form_for([@order, @order.order_details.build]) do |f| %>
   <p>
     <%= f.hidden_field :user_id , :value=>current_user.id %> 
@@ -34,5 +54,8 @@ name <%=  current_user.name %>
   </p>
 <% end %>
 
+<<<<<<< HEAD
 
 <%= link_to 'Back', orders_path %>
+=======
+>>>>>>> refs/remotes/origin/master

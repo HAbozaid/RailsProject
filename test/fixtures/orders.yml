@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+<<<<<<< HEAD
   for: MyString
   from: MyString
   menu_image: MyString
@@ -13,3 +14,11 @@ two:
   menu_image: MyString
   status: MyString
   user_id: 1
+=======
+  name: MyString
+  description: MyText
+
+two:
+  name: MyString
+  description: MyText
+>>>>>>> refs/remotes/origin/master

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>New Order</h1>
 
 <%= form_for(@order) do |f| %>
@@ -44,3 +45,25 @@
 
 
 <%= link_to 'Back', orders_path %>
+=======
+<%= form_for @order do |f| %>
+  <p>
+    <%= f.label :Order_For %>
+    <%= f.text_field :name %>
+  </p>
+  <strong><p> write the resturant name </p></strong>
+  <p>
+    <%= f.label :from %>
+    <%= f.text_field :description %>
+  </p>
+  <strong><p> you can write a friend name or group  </p></strong>
+  <p>
+    <%= f.label :Freinds %>
+     <%= f.hidden_field :status, :value=>"waiting" %> 
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+>>>>>>> refs/remotes/origin/master
